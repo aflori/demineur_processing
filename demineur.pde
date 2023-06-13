@@ -8,12 +8,12 @@ boolean[][][] TableauMine;
 
 int sizeX = 0;
 int sizeY = 0;
+int nombreBombe = 0;
 
 void setup ()
 {
   String inputEntry = "";
   inputEntry = JOptionPane.showInputDialog(null, "Quelle difficulté? ([e]asy, [m]edium, [h]ard, [p]ersonalized");
-  int nombreBombe = 0;
   
   switch (inputEntry) {
     case "e":
@@ -41,7 +41,7 @@ void setup ()
   
   TableauMine = new boolean[sizeX+2][sizeY+2][2];
   initialiseTableauVide();
-  initialiseLesBombes(nombreBombe);
+  initialiseLesBombes();
   
   
 } //<>//
@@ -65,9 +65,9 @@ public void initialiseTableauVide()
   }
 }
 
-public void initialiseLesBombes(int nombreDeBombes)
+public void initialiseLesBombes()
 {
-  for(int i = 0; i< nombreDeBombes;i++)
+  for(int i = 0; i < nombreBombe; i++)
   {
     int x,y;
     do
