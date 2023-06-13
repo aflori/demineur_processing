@@ -3,6 +3,7 @@ public void afficherLaGrille(boolean[][][] Tab, int sizeX, int sizeY)
   final color c_nonTrouve = color(255,255,255);
   final color c_caseVide = color(150,150,150);
   final color c_caseBombe = color(255,50,25);
+  final color c_bombeSupose = color(150, 100,50);
   for(int i=0; i< sizeX; i++)
   {
     for(int j=0; j<sizeY;j++)
@@ -20,6 +21,7 @@ public void afficherLaGrille(boolean[][][] Tab, int sizeX, int sizeY)
        }
        else // case non découvert
        {
+         if (
          fill(c_nonTrouve);
        }
        rect(MARGE/2.0 + i*TAILLE_CASE, MARGE/2.0 + j*TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);

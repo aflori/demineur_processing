@@ -4,7 +4,8 @@ final int TAILLE_CASE = 20;
 final int MARGE = (3*TAILLE_CASE)/ 2;
 
 //Tab[x][y][0] == true si l'utilisateur sait le contenu de la case
-//Tab[x][y][1] == true s'il y a une mine  
+//Tab[x][y][1] == true s'il y a une mine
+//Tab[x][y][2] == true si le joueur a indiqué qu'il y avait une bombe dans la case (implique [0] == true)
 boolean[][][] TableauMine;
 
 int sizeX = 0;
@@ -40,11 +41,12 @@ void setup ()
   
   windowResize(MARGE + sizeX * TAILLE_CASE, MARGE + sizeY * TAILLE_CASE);
   
-  TableauMine = new boolean[sizeX+2][sizeY+2][2];
+  TableauMine = new boolean[sizeX+2][sizeY+2][3];
   initialiseTableauVide();
   initialiseLesBombes();
   
   //for testing purpose
+  for(int i=0; i< sizeX+2;++i) for(int j=0;j<sizeY+2;++j) TableauMine[i][j][0] = true;
 }
 
 
@@ -64,6 +66,7 @@ public void initialiseTableauVide()
   {
     TableauMine[i][j][0] = false;
     TableauMine[i][j][1] = false;
+    TableauMine[i][j][2] = false;
   }
 }
 
