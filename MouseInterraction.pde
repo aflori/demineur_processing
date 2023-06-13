@@ -15,6 +15,17 @@ public void operationLeft(boolean[][][] tab, int coordTableauX, int coordTableau
     if (!tab[coordTableauX][coordTableauY][2])
     {
       tab[coordTableauX][coordTableauY][0] = true;
+      if (tab[coordTableauX][coordTableauY][1])
+      {
+        println("Perdu");
+        for (int i = 0; i< sizeX;i++) for (int j=0; j<sizeY;j++)
+        {
+          if(tab[i+1][j+1][1])
+          {
+            tab[i+1][j+1][0] = true;
+          }
+        }
+      }
     }
   }
 }
@@ -22,13 +33,9 @@ public void operationLeft(boolean[][][] tab, int coordTableauX, int coordTableau
 public void operationRight(boolean[][][] tab, int coordTableauX, int coordTableauY)
 {
   
-  if(tab[coordTableauX][coordTableauY][0])
+  if(!tab[coordTableauX][coordTableauY][0])
   {
-    // Erreur
-  }
-  else
-  {
-    tab[coordTableauX][coordTableauY][2] = !tab[coordTableauX][coordTableauY][2];
+     tab[coordTableauX][coordTableauY][2] = !tab[coordTableauX][coordTableauY][2];
   }
   
 }
