@@ -17,7 +17,10 @@ public void operationLeft(boolean[][][] tab)
   }
   else
   {
-    tab[coordTableauX][coordTableauY][0] = true;
+    if (!tab[coordTableauX][coordTableauY][2])
+    {
+      tab[coordTableauX][coordTableauY][0] = true;
+    }
   }
 }
 
