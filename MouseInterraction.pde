@@ -1,3 +1,4 @@
+
 public void operationLeft(boolean[][][] tab, int coordTableauX, int coordTableauY)
 {
   //Enregistrement des valeurs pour les calcules et pour connaître le type
@@ -26,6 +27,10 @@ public void operationLeft(boolean[][][] tab, int coordTableauX, int coordTableau
           }
         }
         partieEnCour = false;
+      }
+      else
+      {
+        extendValeurDeclarer(tab, coordTableauX, coordTableauY);
       }
     }
   }
@@ -59,9 +64,18 @@ public void devoileValeurAutour(boolean [][][] tab, int x, int y)
 {
   for( int i=x-1;i<=x+1;i++) for(int j=y-1;j<=y+1;j++)
   {
-    if( !tab[i][j][2])
+    if( !tab[i][j][2] && !tab[i][j][0])
     {
       tab[i][j][0] = true;
+      extendValeurDeclarer(tab,i,j);
     }
+  }
+}
+
+public void extendValeurDeclarer(boolean[][][] tab, int x, int y)
+{
+  if (x > 0 && y > 0 && x < sizeX+1 && y < sizeY+1 && getNombreBombeAutour(tab,x, y) == 0)
+  {
+     devoileValeurAutour(tab, x, y);
   }
 }
