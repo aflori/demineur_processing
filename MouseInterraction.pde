@@ -16,8 +16,6 @@ public void operationLeft(boolean[][][] tab, int coordTableauX, int coordTableau
     if (!tab[coordTableauX][coordTableauY][2])
     {
       devoilerCase(tab, coordTableauX, coordTableauY);
-      caseDecouvert++;
-      
     }
   }
 }
@@ -82,6 +80,14 @@ public void devoilerCase(boolean[][][] tab, int x, int y)
   else
   {
     caseDecouvert++;
-    extendValeurDeclarer(tab, x, y);
+    if(caseDecouvert >= caseSansBombe) //<>//
+    {
+      //println("Gagné");
+      //partieEnCour = false;
+    }
+    else
+    {
+      extendValeurDeclarer(tab, x, y);
+    }
   }
 }

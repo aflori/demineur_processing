@@ -20,7 +20,7 @@ boolean fenettreAEffacer = false;
 void setup ()
 {
   String inputEntry = "";
-  inputEntry = JOptionPane.showInputDialog(null, "Quelle difficulté? ([e]asy, [m]edium, [h]ard, [p]ersonalized");
+  inputEntry = JOptionPane.showInputDialog(null, "Quelle difficulté? ([e]asy, [m]edium, [h]ard, [p]ersonalized"); //<>//
   
   switch (inputEntry) {
     case "e":
@@ -43,18 +43,18 @@ void setup ()
       sizeY = int(JOptionPane.showInputDialog(null, "Combien de case de hauteur?")); 
       nombreBombe = int(JOptionPane.showInputDialog(null, "Combien de bombes?")); 
   }
-  
+  caseSansBombe = sizeX * sizeY - nombreBombe;
   windowResize(MARGE + sizeX * TAILLE_CASE, MARGE + sizeY * TAILLE_CASE);
-  
+  println(nombreBombe, sizeX * sizeY, caseSansBombe);
   TableauMine = new boolean[sizeX+2][sizeY+2][3];
   initialiseTableauVide();
-  initialiseLesBombes();
+  initialiseLesBombes(); //<>//
   
 }
 
 
 void draw ()
-{ //<>//
+{
   if(fenettreAEffacer) exit();
   afficherLaGrille(TableauMine, sizeX, sizeY);
 }
@@ -102,7 +102,7 @@ public void initialiseTableauVide()
 public void initialiseLesBombes()
 {
   for(int i = 0; i < nombreBombe; i++)
-  {
+  { //<>//
     int x,y;
     do
     {
