@@ -1,6 +1,7 @@
 import javax.swing.JOptionPane;
 
-final int TAILLE_CASE = 10;
+final int TAILLE_CASE = 20;
+final int MARGE = (3*TAILLE_CASE)/ 2;
 
 //Tab[x][y][0] == true si l'utilisateur sait le contenu de la case
 //Tab[x][y][1] == true s'il y a une mine  
@@ -22,13 +23,13 @@ void setup ()
       nombreBombe = 15;
       break;
     case "m":
-      sizeX = 25;
-      sizeY = 30;
+      sizeX = 30;
+      sizeY = 25;
       nombreBombe = 50;
       break;
     case "h":
-      sizeX = 40;
-      sizeY = 60;
+      sizeX = 60;
+      sizeY = 40;
       nombreBombe = 120;
       break;
     default:
@@ -37,18 +38,19 @@ void setup ()
       nombreBombe = int(JOptionPane.showInputDialog(null, "Combien de bombes?")); 
   }
   
-  windowResize(10 + sizeX * TAILLE_CASE, 10 + sizeY * TAILLE_CASE);
+  windowResize(MARGE + sizeX * TAILLE_CASE, MARGE + sizeY * TAILLE_CASE);
   
   TableauMine = new boolean[sizeX+2][sizeY+2][2];
   initialiseTableauVide();
   initialiseLesBombes();
   
-  
-} //<>//
+  //for testing purpose
+}
 
 
 void draw ()
-{
+{ //<>//
+  afficherLaGrille(TableauMine, sizeX, sizeY);
 }
 
 void mouseClicked()
