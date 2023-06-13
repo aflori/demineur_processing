@@ -45,8 +45,6 @@ void setup ()
   initialiseTableauVide();
   initialiseLesBombes();
   
-  //for testing purpose
-  for(int i=0; i< sizeX+2;++i) for(int j=0;j<sizeY+2;++j) TableauMine[i][j][0] = true;
 }
 
 
@@ -57,6 +55,15 @@ void draw ()
 
 void mouseClicked()
 {
+  if ( mouseButton == LEFT)
+  {
+    operationLeft(TableauMine);
+  }
+  else if (mouseButton == RIGHT)
+  {
+    operationRight(TableauMine);
+  }
+  //no need for the CENTER value
 }
 
 //personalized functions
