@@ -1,19 +1,14 @@
-public void operationLeft(boolean[][][] tab)
+public void operationLeft(boolean[][][] tab, int coordTableauX, int coordTableauY)
 {
   //Enregistrement des valeurs pour les calcules et pour connaître le type
-  float positionX = mouseX;
-  float positionY = mouseY;
   
-  positionX -= MARGE/2.0;
-  positionY -= MARGE/2.0;
-  
-  int coordTableauX = int(positionX / (float) TAILLE_CASE);
-  int coordTableauY = int(positionY / (float) TAILLE_CASE);
-  coordTableauX++; coordTableauY++;
   
   if(tab[coordTableauX][coordTableauY][0])
   {
-    //sera fait dans une prochaine mise à jour
+    if(tab[coordTableauX][coordTableauY][0] && !tab[coordTableauX][coordTableauY][1] && bonNombreDeBombeAutour(tab,coordTableauX,coordTableauY) )
+    {
+      devoileValeurAutour(tab,coordTableauX,coordTableauY);
+    }
   }
   else
   {
@@ -24,17 +19,8 @@ public void operationLeft(boolean[][][] tab)
   }
 }
 
-public void operationRight(boolean[][][] tab)
+public void operationRight(boolean[][][] tab, int coordTableauX, int coordTableauY)
 {
-  float positionX = mouseX;
-  float positionY = mouseY;
-  
-  positionX -= MARGE/2.0;
-  positionY -= MARGE/2.0;
-  
-  int coordTableauX = int(positionX / (float) TAILLE_CASE);
-  int coordTableauY = int(positionY / (float) TAILLE_CASE);
-  coordTableauX++; coordTableauY++;
   
   if(tab[coordTableauX][coordTableauY][0])
   {
@@ -45,4 +31,29 @@ public void operationRight(boolean[][][] tab)
     tab[coordTableauX][coordTableauY][2] = !tab[coordTableauX][coordTableauY][2];
   }
   
+}
+
+public boolean bonNombreDeBombeAutour(boolean[][][] tab, int x, int y)
+{
+  int NombreBombes = getNombreBombeAutour(tab,x,y);
+  int compteurbombe = 0;
+  for(int i= x-1; i<=x+1; i++) for(int j = y-1; j<= y+1; j++)
+  {
+    if ( (tab[i][j][0] && tab[i][j][1]) || (!tab[i][j][0] && tab[i][j][2]))
+    {
+      compteurbombe++;
+    }
+  }
+  return compteurbombe == NombreBombes;
+}
+
+public void devoileValeurAutour(boolean [][][] tab, int x, int y)
+{
+  for( int i=x-1;i<=x+1;i++) for(int j=y-1;j<=y+1;j++)
+  {
+    if( !tab[i][j][2])
+    {
+      tab[i][j][0] = true;
+    }
+  }
 }

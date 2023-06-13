@@ -55,13 +55,22 @@ void draw ()
 
 void mouseClicked()
 {
+  float positionX = mouseX;
+  float positionY = mouseY;
+  
+  positionX -= MARGE/2.0;
+  positionY -= MARGE/2.0;
+  
+  int coordTableauX = int(positionX / (float) TAILLE_CASE);
+  int coordTableauY = int(positionY / (float) TAILLE_CASE);
+  coordTableauX++; coordTableauY++;
   if ( mouseButton == LEFT)
   {
-    operationLeft(TableauMine);
+    operationLeft(TableauMine, coordTableauX, coordTableauY);
   }
   else if (mouseButton == RIGHT)
   {
-    operationRight(TableauMine);
+    operationRight(TableauMine, coordTableauX, coordTableauY);
   }
   //no need for the CENTER value
 }
