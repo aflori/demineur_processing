@@ -15,23 +15,9 @@ public void operationLeft(boolean[][][] tab, int coordTableauX, int coordTableau
   {
     if (!tab[coordTableauX][coordTableauY][2])
     {
-      tab[coordTableauX][coordTableauY][0] = true;
-      if (tab[coordTableauX][coordTableauY][1])
-      {
-        println("Perdu");
-        for (int i = 0; i< sizeX;i++) for (int j=0; j<sizeY;j++)
-        {
-          if(tab[i+1][j+1][1])
-          {
-            tab[i+1][j+1][0] = true;
-          }
-        }
-        partieEnCour = false;
-      }
-      else
-      {
-        extendValeurDeclarer(tab, coordTableauX, coordTableauY);
-      }
+      devoilerCase(tab, coordTableauX, coordTableauY);
+      caseDecouvert++;
+      
     }
   }
 }
@@ -66,8 +52,7 @@ public void devoileValeurAutour(boolean [][][] tab, int x, int y)
   {
     if( !tab[i][j][2] && !tab[i][j][0])
     {
-      tab[i][j][0] = true;
-      extendValeurDeclarer(tab,i,j);
+      devoilerCase(tab,i,j);
     }
   }
 }
@@ -77,5 +62,26 @@ public void extendValeurDeclarer(boolean[][][] tab, int x, int y)
   if (x > 0 && y > 0 && x < sizeX+1 && y < sizeY+1 && getNombreBombeAutour(tab,x, y) == 0)
   {
      devoileValeurAutour(tab, x, y);
+  }
+}
+public void devoilerCase(boolean[][][] tab, int x, int y)
+{
+  tab[x][y][0] = true;
+  if (tab[x][y][1])
+  {
+     println("Perdu");
+     for (int i = 0; i< sizeX;i++) for (int j=0; j<sizeY;j++)
+     {
+       if(tab[i+1][j+1][1])
+       {
+         tab[i+1][j+1][0] = true;
+       }
+     }
+     partieEnCour = false;
+  }
+  else
+  {
+    caseDecouvert++;
+    extendValeurDeclarer(tab, x, y);
   }
 }

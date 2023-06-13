@@ -11,6 +11,8 @@ boolean[][][] TableauMine;
 int sizeX = 0;
 int sizeY = 0;
 int nombreBombe = 0;
+int caseDecouvert = 0;
+int caseSansBombe = 0;
 
 boolean partieEnCour = true;
 boolean fenettreAEffacer = false;
