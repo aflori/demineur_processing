@@ -46,7 +46,16 @@ public void afficherLaGrille(boolean[][][] Tab, int sizeX, int sizeY)
   }
 }
 
-int getNombreBombeAutour(boolean[][][] tab, int x, int y)
+public int getNombreBombeAutour(boolean[][][] tab, int x, int y)
 {
-  return 0;
+  int nombreBombe =0;
+  for (int i= x-1;i <= x+1 ; i++) for (int j = y-1; j <= y+1; j++)
+  {
+    if( tab[i][j][1] && ( i != x || j != y) )
+    {
+      nombreBombe++;
+    }
+  }
+  
+  return nombreBombe;
 }
