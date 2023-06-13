@@ -25,6 +25,7 @@ public void operationLeft(boolean[][][] tab, int coordTableauX, int coordTableau
             tab[i+1][j+1][0] = true;
           }
         }
+        partieEnCour = false;
       }
     }
   }

@@ -12,6 +12,9 @@ int sizeX = 0;
 int sizeY = 0;
 int nombreBombe = 0;
 
+boolean partieEnCour = true;
+boolean fenettreAEffacer = false;
+
 void setup ()
 {
   String inputEntry = "";
@@ -50,29 +53,37 @@ void setup ()
 
 void draw ()
 { //<>//
+  if(fenettreAEffacer) exit();
   afficherLaGrille(TableauMine, sizeX, sizeY);
 }
 
 void mouseClicked()
 {
-  float positionX = mouseX;
-  float positionY = mouseY;
-  
-  positionX -= MARGE/2.0;
-  positionY -= MARGE/2.0;
-  
-  int coordTableauX = int(positionX / (float) TAILLE_CASE);
-  int coordTableauY = int(positionY / (float) TAILLE_CASE);
-  coordTableauX++; coordTableauY++;
-  if ( mouseButton == LEFT)
+  if(! partieEnCour)
   {
-    operationLeft(TableauMine, coordTableauX, coordTableauY);
+    fenettreAEffacer = true;
   }
-  else if (mouseButton == RIGHT)
+  else
   {
-    operationRight(TableauMine, coordTableauX, coordTableauY);
+    float positionX = mouseX;
+    float positionY = mouseY;
+    
+    positionX -= MARGE/2.0;
+    positionY -= MARGE/2.0;
+    
+    int coordTableauX = int(positionX / (float) TAILLE_CASE);
+    int coordTableauY = int(positionY / (float) TAILLE_CASE);
+    coordTableauX++; coordTableauY++;
+    if ( mouseButton == LEFT)
+    {
+      operationLeft(TableauMine, coordTableauX, coordTableauY);
+    }
+    else if (mouseButton == RIGHT)
+    {
+      operationRight(TableauMine, coordTableauX, coordTableauY);
+    }
+    //no need for the CENTER value
   }
-  //no need for the CENTER value
 }
 
 //personalized functions
