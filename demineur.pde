@@ -45,7 +45,7 @@ void setup ()
   }
   caseSansBombe = sizeX * sizeY - nombreBombe;
   windowResize(MARGE + sizeX * TAILLE_CASE, MARGE + sizeY * TAILLE_CASE);
-  println(nombreBombe, sizeX * sizeY, caseSansBombe);
+  
   TableauMine = new boolean[sizeX+2][sizeY+2][3];
   initialiseTableauVide();
   initialiseLesBombes(); //<>//

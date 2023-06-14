@@ -64,6 +64,7 @@ public void extendValeurDeclarer(boolean[][][] tab, int x, int y)
 }
 public void devoilerCase(boolean[][][] tab, int x, int y)
 {
+  if (x == 0 || y == 0 || x == (sizeX+1) || y == (sizeY+1) ) return ;
   tab[x][y][0] = true;
   if (tab[x][y][1])
   {
@@ -82,8 +83,8 @@ public void devoilerCase(boolean[][][] tab, int x, int y)
     caseDecouvert++;
     if(caseDecouvert >= caseSansBombe) //<>//
     {
-      //println("Gagné");
-      //partieEnCour = false;
+      println("Gagné");
+      partieEnCour = false;
     }
     else
     {
