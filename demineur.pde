@@ -16,6 +16,7 @@ int caseSansBombe = 0;
 
 boolean partieEnCour = true;
 boolean fenettreAEffacer = false;
+boolean tableauAInitialise = true;
 
 void setup ()
 {
@@ -60,9 +61,7 @@ void setup ()
   caseSansBombe = sizeX * sizeY - nombreBombe;
   windowResize(MARGE + sizeX * TAILLE_CASE, MARGE + sizeY * TAILLE_CASE);
   
-  TableauMine = new boolean[sizeX+2][sizeY+2][3];
-  initialiseTableauVide();
-  initialiseLesBombes(); //<>//
+  TableauMine = new boolean[sizeX+2][sizeY+2][3]; //<>//
   
 }
 
@@ -90,6 +89,15 @@ void mouseClicked()
     int coordTableauX = int(positionX / (float) TAILLE_CASE);
     int coordTableauY = int(positionY / (float) TAILLE_CASE);
     coordTableauX++; coordTableauY++;
+    if(tableauAInitialise && mouseButton == LEFT)
+    {
+      do
+      {
+        initialiseTableauVide();
+        initialiseLesBombes();
+      } while(TableauMine[coordTableauX][coordTableauY][1] || getNombreBombeAutour(TableauMine, coordTableauX, coordTableauY) != 0 );
+      tableauAInitialise = false;
+    }
     if ( mouseButton == LEFT)
     {
       operationLeft(TableauMine, coordTableauX, coordTableauY);
