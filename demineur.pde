@@ -20,28 +20,42 @@ boolean fenettreAEffacer = false;
 void setup ()
 {
   String inputEntry = "";
-  inputEntry = JOptionPane.showInputDialog(null, "Quelle difficulté? ([e]asy, [m]edium, [h]ard, [p]ersonalized"); //<>//
-  
-  switch (inputEntry) {
-    case "e":
+  do
+  {
+    inputEntry = JOptionPane.showInputDialog(null, "Quelle difficulté? ([e]asy, [m]edium, [h]ard, [p]ersonalized"); //<>//
+  } while( inputEntry.equals(""));
+  switch (inputEntry.charAt(0)) {
+    case 'e':
       sizeX = 10;
       sizeY = 10;
-      nombreBombe = 15;
+      nombreBombe = 10;
       break;
-    case "m":
+    case 'm':
+      sizeX = 16;
+      sizeY = 16;
+      nombreBombe = 40;
+      break;
+    case 'h':
       sizeX = 30;
-      sizeY = 25;
-      nombreBombe = 50;
-      break;
-    case "h":
-      sizeX = 60;
-      sizeY = 40;
-      nombreBombe = 120;
+      sizeY = 16;
+      nombreBombe = 111;
       break;
     default:
-      sizeX = int(JOptionPane.showInputDialog(null, "Combien de Case de largeur?")); 
-      sizeY = int(JOptionPane.showInputDialog(null, "Combien de case de hauteur?")); 
-      nombreBombe = int(JOptionPane.showInputDialog(null, "Combien de bombes?")); 
+      do
+      {
+        sizeX = int(JOptionPane.showInputDialog(null, "Combien de Case de largeur?")); 
+        sizeY = int(JOptionPane.showInputDialog(null, "Combien de case de hauteur?")); 
+        nombreBombe = int(JOptionPane.showInputDialog(null, "Combien de bombes?"));
+        
+        if(sizeX*sizeY <= nombreBombe)
+        {
+          println("Ces valeurs ne sont pas correctes, entrez-les à nouveau");
+        }
+        else
+        {
+          break;
+        }
+      }while(true);
   }
   caseSansBombe = sizeX * sizeY - nombreBombe;
   windowResize(MARGE + sizeX * TAILLE_CASE, MARGE + sizeY * TAILLE_CASE);
