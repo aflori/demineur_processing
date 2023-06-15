@@ -8,18 +8,28 @@ final int MARGE = (3*TAILLE_CASE)/ 2;
 //Tab[x][y][2] == true si le joueur a indiqué qu'il y avait une bombe dans la case (implique [0] == true)
 boolean[][][] TableauMine;
 
-int sizeX = 0;
-int sizeY = 0;
-int nombreBombe = 0;
-int caseDecouvert = 0;
-int caseSansBombe = 0;
+int sizeX;
+int sizeY;
+int nombreBombe;
+int caseDecouvert;
+int caseSansBombe;
 
-boolean partieEnCour = true;
-boolean fenettreAEffacer = false;
-boolean tableauAInitialise = true;
+boolean partieEnCour;
+boolean fenettreAEffacer;
+boolean tableauAInitialise;
 
 void setup ()
 {
+  sizeX = 0;
+  sizeY = 0;
+  nombreBombe = 0;
+  caseDecouvert = 0;
+  caseSansBombe = 0;
+
+  partieEnCour = true;
+  fenettreAEffacer = false;
+  tableauAInitialise = true;
+  
   String inputEntry = "";
   do
   {
@@ -61,7 +71,7 @@ void setup ()
   caseSansBombe = sizeX * sizeY - nombreBombe;
   windowResize(MARGE + sizeX * TAILLE_CASE, MARGE + sizeY * TAILLE_CASE);
   
-  TableauMine = new boolean[sizeX+2][sizeY+2][3]; //<>//
+  TableauMine = new boolean[sizeX+2][sizeY+2][3];
   initialiseTableauVide();
   
 }
@@ -69,8 +79,26 @@ void setup ()
 
 void draw ()
 {
-  if(fenettreAEffacer) exit();
-  afficherLaGrille(TableauMine, sizeX, sizeY);
+  // partieEnCour, fenettreAEffacer, tableauAInitialise
+  if(fenettreAEffacer) 
+  {
+    String inputEntry;
+    do
+    {
+        inputEntry = JOptionPane.showInputDialog(null, "La partie est fini. Voulez-vous rejouer? (o/N)");
+        inputEntry.toLowerCase();
+    }while ( !(inputEntry.equals("") || inputEntry.equals("n") || inputEntry.equals("non") || inputEntry.equals("o") || inputEntry.equals("oui") ) );
+    
+    if (  inputEntry.equals("o") || inputEntry.equals("oui") )
+    {
+      setup();
+    }
+    else
+    {
+      exit();
+    }
+  }
+  afficherLaGrille(TableauMine, sizeX, sizeY); //<>//
 }
 
 void mouseClicked()
