@@ -48,7 +48,7 @@ void setup ()
         sizeY = int(JOptionPane.showInputDialog(null, "Combien de case de hauteur?")); 
         nombreBombe = int(JOptionPane.showInputDialog(null, "Combien de bombes?"));
         
-        if(sizeX*sizeY <= nombreBombe)
+        if( (sizeX*sizeY - nombreBombe) < 9)
         {
           println("Ces valeurs ne sont pas correctes, entrez-les à nouveau");
         }
@@ -62,6 +62,7 @@ void setup ()
   windowResize(MARGE + sizeX * TAILLE_CASE, MARGE + sizeY * TAILLE_CASE);
   
   TableauMine = new boolean[sizeX+2][sizeY+2][3]; //<>//
+  initialiseTableauVide();
   
 }
 
