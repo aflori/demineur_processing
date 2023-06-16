@@ -55,16 +55,10 @@ public void devoileValeurAutour(boolean [][][] tab, int x, int y)
   }
 }
 
-public void extendValeurDeclarer(boolean[][][] tab, int x, int y)
-{
-  if (x > 0 && y > 0 && x < sizeX+1 && y < sizeY+1 && getNombreBombeAutour(tab,x, y) == 0)
-  {
-     devoileValeurAutour(tab, x, y);
-  }
-}
+
 public void devoilerCase(boolean[][][] tab, int x, int y)
 {
-  if (x == 0 || y == 0 || x == (sizeX+1) || y == (sizeY+1) ) return ;
+  if (x == 0 || y == 0 || x == (sizeX+1) || y == (sizeY+1) || !partieEnCour) return ;
   tab[x][y][0] = true;
   if (tab[x][y][1])
   {
@@ -81,14 +75,43 @@ public void devoilerCase(boolean[][][] tab, int x, int y)
   else
   {
     caseDecouvert++;
-    if(caseDecouvert >= caseSansBombe) //<>//
+    
+    
+    if(getNombreBombeAutour(tab,x,y) == 0)
+    {
+      //old recursive fonction was launch with "extendValeurDeclarer(tab, x, y);"
+      boolean resterDansLeWhile = true;
+      while(resterDansLeWhile) //<>//
+      {
+        resterDansLeWhile = false;
+        for (int i=1; i <= sizeX;i++)
+        {
+          for(int j=1; j<=sizeY; j++)
+          {
+            if( tab[i][j][0] && getNombreBombeAutour(tab, i, j) == 0 )
+            { // case dévoilé sachant que l'on n'a pas dévoilé de bombe sinon la partie serait déjà fini
+              for(int x2 = i-1; x2<= i+1;x2++)
+              {
+                for(int y2 = j-1; y2<= j+1;y2++)
+                {
+                  if(x2 > 0 && x2 <= sizeX && y2 > 0 && y2 <=sizeY && !tab[x2][y2][0])
+                  {
+                    resterDansLeWhile = true; // on continue la boucle while: c'est peut être un getNombreBombeAutour == 0
+                    tab[x2][y2][0] = true; // dévoilement de la case
+                    caseDecouvert++;     // incrémentation du compteur qui indique combien de case ont été dévoilés
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if(caseDecouvert >= caseSansBombe)
     {
       println("Gagné");
       partieEnCour = false;
-    }
-    else
-    {
-      extendValeurDeclarer(tab, x, y);
     }
   }
 }
